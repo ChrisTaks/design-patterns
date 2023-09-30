@@ -21,11 +21,11 @@ public class Game {
    * Constructs a game by putting the difficulty files into a hashmap
    */
   private Game() {
-      anagrams = new HashMap();
-      anagrams.put(Difficulty.EASY, FileReader.getAnagrams(Difficulty.EASY));
-      anagrams.put(Difficulty.MEDIUM, FileReader.getAnagrams(Difficulty.MEDIUM));
-      anagrams.put(Difficulty.HARD, FileReader.getAnagrams(Difficulty.HARD));
-      rand = new Random();
+      this.anagrams = new HashMap();
+      this.anagrams.put(Difficulty.EASY, FileReader.getAnagrams(Difficulty.EASY));
+      this.anagrams.put(Difficulty.MEDIUM, FileReader.getAnagrams(Difficulty.MEDIUM));
+      this.anagrams.put(Difficulty.HARD, FileReader.getAnagrams(Difficulty.HARD));
+      this.rand = new Random();
   }
 
   /**
@@ -44,13 +44,13 @@ public class Game {
    */
   public String getQuestion() {
     if (game.getScore() <= 2) {
-      game.level = Difficulty.EASY;
+      this.level = Difficulty.EASY;
     }
     else if (game.getScore() <= 5) {
-      game.level = Difficulty.MEDIUM;
+      this.level = Difficulty.MEDIUM;
     }
     else if (game.getScore() > 5) {
-      game.level = Difficulty.HARD;
+      this.level = Difficulty.HARD;
     }
     int r = rand.nextInt(game.anagrams.get(game.level).size());
     // stops the same random int from being chosen two times in a row
@@ -62,7 +62,7 @@ public class Game {
         isSame = false;
     }
 
-    game.currentAnagram = game.anagrams.get(game.level).get(r);
+    this.currentAnagram = game.anagrams.get(game.level).get(r);
     return currentAnagram.getQuestion();
   }
 
