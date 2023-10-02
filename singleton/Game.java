@@ -21,7 +21,7 @@ public class Game {
    * Constructs a game by putting the difficulty files into a hashmap
    */
   private Game() {
-      this.anagrams = new HashMap();
+      this.anagrams = new HashMap<Difficulty, ArrayList<Anagram>>();
       this.anagrams.put(Difficulty.EASY, FileReader.getAnagrams(Difficulty.EASY));
       this.anagrams.put(Difficulty.MEDIUM, FileReader.getAnagrams(Difficulty.MEDIUM));
       this.anagrams.put(Difficulty.HARD, FileReader.getAnagrams(Difficulty.HARD));
@@ -46,10 +46,10 @@ public class Game {
     if (game.getScore() <= 2) {
       this.level = Difficulty.EASY;
     }
-    else if (game.getScore() <= 5) {
+    else if (game.getScore() <= 6) {
       this.level = Difficulty.MEDIUM;
     }
-    else if (game.getScore() > 5) {
+    else if (game.getScore() > 6) {
       this.level = Difficulty.HARD;
     }
     int r = rand.nextInt(game.anagrams.get(game.level).size());
