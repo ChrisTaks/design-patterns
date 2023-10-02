@@ -52,16 +52,14 @@ public class Game {
     else if (game.getScore() > 6) {
       this.level = Difficulty.HARD;
     }
+    // removes anagram from list after it was used (stops reuse), also doesn't remove on upwards level change
+    if (game.currentAnagram != null && game.getScore() != 3 && game.getScore() != 7)
+      game.anagrams.get(game.level).remove(game.currentAnagram);
+    // if the anagram list is depleted, it rebuilds it.
+    if (game.anagrams.get(game.level).size() == 0)
+      this.anagrams.put(this.level, FileReader.getAnagrams(this.level));
+    
     int r = rand.nextInt(game.anagrams.get(game.level).size());
-    // stops the same random int from being chosen two times in a row
-    boolean isSame = true;
-    while(isSame) {
-      if (game.anagrams.get(game.level).get(r) == game.currentAnagram)
-        r = rand.nextInt(game.anagrams.get(game.level).size());
-      else
-        isSame = false;
-    }
-
     this.currentAnagram = game.anagrams.get(game.level).get(r);
     return currentAnagram.getQuestion();
   }
